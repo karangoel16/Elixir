@@ -9,7 +9,7 @@ defmodule Project1.Mixfile do
       start_permanent: Mix.env == :prod,
       build_permanent: Mix.env == :prod,
       deps: deps(),
-      escript: escript
+      escript: escript()
     ]
   end
 
@@ -28,8 +28,8 @@ defmodule Project1.Mixfile do
     ]
   end
 
-  defp escript do[
-    main_module: Project1.main]
+  defp escript do
+    [main_module: Project1]
   end
 
 end

@@ -13,10 +13,11 @@ defmodule Project1 do
       :world
 
   """ 
-  def main() do
-    port=4000
-    {:ok,socket}=:gen_tcp.listen(port,[:binary,packet: :line,active: false,reuseaddr: true])
-    Logger.info("Accepting Connections on port #{port}")
+  def main(args\\[4000]) do
+    {:ok,port}=Enum.fetch(args,0)
+    {intport, _} = Integer.parse(port)
+    {:ok,socket}=:gen_tcp.listen(intport,[:binary,packet: :line,active: false,reuseaddr: true])
+    Logger.info("Accepting Connections on port #{intport}")
     loop_acceptor(socket)
   end
 
