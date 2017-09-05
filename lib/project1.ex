@@ -14,7 +14,6 @@ defmodule Project1 do
   end
   def wait(val,args) do
     list=Node.list
-    IO.puts(length(list));
     if length(list) > val do
       IO.puts("New Node Added")
       val=val+1;
