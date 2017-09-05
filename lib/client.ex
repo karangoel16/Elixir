@@ -4,6 +4,19 @@ defmodule Project1.Client do
     use GenServer
   
     #client
+    def connect(args) do
+      Project1.Exdistutils.start_distributed(:project1,:ok)
+      val="project1@"<>List.first(args);
+      IO.puts(val);
+      ping=Node.ping :"#{val}"
+      IO.puts(ping)
+      if ping == :pang do
+        IO.puts("Not able to Connect")
+        Process.sleep(1_000_000)
+      end
+      IO.puts("connecting to node successful")
+    end
+    
     def start_link() do
       GenServer.start_link(__MODULE__, :ok)
     end
