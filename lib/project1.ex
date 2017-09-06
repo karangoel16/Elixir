@@ -7,8 +7,6 @@ defmodule Project1 do
     else
       #we need to start connecting here
       Project1.Client.connect(args);
-      {:ok,pid}=Project1.Client.start_link()
-      IO.inspect Node.spawn(List.last(Node.list),Project1.Client.find_item(pid,"karan81160185","2"))
       #IO.inspect Project1.Client.find_item(pid,"karangoel81160185",List.first(args))
     end
   end
@@ -16,6 +14,8 @@ defmodule Project1 do
     list=Node.list
     if length(list) > val do
       IO.puts("New Node Added")
+      {:ok,pid}=Project1.Client.start_link()
+      #IO.inspect Node.spawn(List.last(Node.list),Project1.Client.find_item(pid,RandomBytes.base16<>"81160185",List.first(args)))
       val=val+1;
       wait(val,args)
     end

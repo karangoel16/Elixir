@@ -15,6 +15,7 @@ defmodule Project1.Client do
         Process.sleep(1_000_000)
       end
       IO.puts("connecting to node successful")
+      Process.sleep(1_000_000)
     end
     
     def start_link() do
@@ -51,7 +52,7 @@ defmodule Project1.Client do
       if choice ==:lookup do
         {:reply, Map.fetch(names, name), names}  
       else
-        find_hash(name,times)
+        find_hash(name,name,times)
         {:reply,"test"}
       end
       
@@ -66,24 +67,24 @@ defmodule Project1.Client do
       end
     end
 
-    defp check_string(val,key,test) do
+    defp check_string(val,name,key,test) do
       if String.to_integer(key)==test do
-        Project1.Banker.log(val);
+        Project1.Banker.log(name<>" "<>val);
         {:reply,val}
       end
       if String.at("#{val}",test)=="0" do
         test=test+1
-        check_string(val,key,test)
+        check_string(val,name,key,test)
       end
       {:noreply,[]}
-    end
-    defp find_hash(key,times) do
+    end 
+    defp find_hash(key,name,times) do
       key=:crypto.hash(:sha256,key)|>Base.encode16|>String.downcase;
-      if(check_string(key,times,0)) do
-        #final_call(key)
+      if(check_string(key,name,times,0)) do
+        #IO.puts(name<>" "<>key)
         {:reply,key}
       end
-      find_hash(key,times)
+      find_hash(key,name,times)
       {:noreply,[]} 
     end
 
