@@ -16,7 +16,7 @@ defmodule Project1 do
     if length(list) > val do
       IO.puts("New Node Added")
       {:ok,pid}=Project1.Client.start_link();
-      IO.inspect Node.spawn(List.last(Node.list),Project1.Client.find_item(pid,"karan81160185","2"))
+      IO.inspect Node.spawn(List.last(Node.list),Project1.Client.find_item(pid,RandomBytes.base16,"2"))
       val=val+1;
       wait(val,args)
     end
