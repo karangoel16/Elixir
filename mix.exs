@@ -28,8 +28,9 @@ defmodule Project1.Mixfile do
     ]
   end
 
-  defp escript() do[
+  defp escript() do
+    [
     main_module: Project1]
-
+    end
 
 end
