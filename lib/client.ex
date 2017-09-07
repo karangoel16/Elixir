@@ -5,6 +5,7 @@ defmodule Project1.Client do
   
     #client
     def connect(args) do
+      Node.alive?
       Project1.Exdistutils.start_distributed(:project1,:ok)
       val="project1@"<>List.first(args);
       IO.puts(val);
@@ -15,11 +16,12 @@ defmodule Project1.Client do
         Process.sleep(1_000_000)
       end
       IO.puts("connecting to node successful")
-      Process.sleep(1_000_000)
+      Process.sleep(100000)
+      connect(args)
     end
     
     def start_link() do
-      GenServer.start_link(__MODULE__, :ok)
+      GenServer.start_link(__MODULE__,:ok)
     end
 
     def lookup(server, name) do
@@ -49,10 +51,9 @@ defmodule Project1.Client do
     end
 
     def handle_call({choice, name,times}, _from, names) do
-      if choice ==:lookup do
-        {:reply, Map.fetch(names, name), names}  
-      else
-        find_hash(name,name,times)
+      case choice do
+        :lookup -> {:reply, Map.fetch(names, name), names}  
+        :initialize ->find_hash(name,name,times)
         {:reply,"test"}
       end
       
@@ -69,7 +70,7 @@ defmodule Project1.Client do
 
     defp check_string(val,name,key,test) do
       if String.to_integer(key)==test do
-        Project1.Banker.log(name<>" "<>val);
+        IO.puts(name<>" "<>val);
         {:reply,val}
       end
       if String.at("#{val}",test)=="0" do

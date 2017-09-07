@@ -14,9 +14,7 @@ defmodule Project1 do
   def wait(val,args) do
     list=Node.list
     if length(list) > val do
-      IO.puts("New Node Added")
-      {:ok,pid}=Project1.Client.start_link();
-      IO.inspect Node.spawn(List.last(Node.list),Project1.Client.find_item(pid,RandomBytes.base16,"2"))
+      pid=Node.spawn(List.last(Node.list),Project1.Supervisor,:start_child,[RandomBytes.base16,List.first(args)])
       val=val+1;
       wait(val,args)
     end
