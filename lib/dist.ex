@@ -1,3 +1,4 @@
+#https://gist.github.com/jisaacstone/7a698ad05e61a15b4d28
 defmodule Project1.Exdistutils do
     def start_distributed(appname,server\\:error) do
       unless Node.alive?() do

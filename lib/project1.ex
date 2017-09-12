@@ -11,12 +11,13 @@ defmodule Project1 do
       #IO.inspect Project1.Client.find_item(pid,"karangoel81160185",List.first(args))
     end
   end
-  def wait(val,args) do
+  def wait(val,args,map\\%{}) do
     list=Node.list
     if length(list) > val do
-      pid=Node.spawn(List.last(Node.list),Project1.Supervisor,:start_child,[RandomBytes.base16,List.first(args)])
+      
+      pid=Node.spawn(List.last(Node.list),Project1.Supervisor,:start_child,["81160185"<>RandomBytes.base16,List.first(args)])
       val=val+1;
-      wait(val,args)
+      wait(val,args,map)
     end
     wait(val,args)
   end
