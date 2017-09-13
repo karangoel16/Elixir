@@ -15,7 +15,7 @@ defmodule Project1.Exdistutils do
       hex=
         case server do
         :error-> ""
-        :ok-> hex = :erlang.monotonic_time() |>
+        :ok->  :erlang.monotonic_time() |>
               :erlang.phash2(256) |>
               Integer.to_string(16)
         end

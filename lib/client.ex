@@ -16,7 +16,7 @@ defmodule Project1.Client do
         Process.sleep(1_000_000)
       end
       IO.puts("connecting to node successful")
-      Process.sleep(100000)
+      Process.sleep(10000)
       connect(args)
     end
     
@@ -71,6 +71,8 @@ defmodule Project1.Client do
     defp check_string(val,name,key,test) do
       if String.to_integer(key)==test do
         IO.puts(name<>" "<>val);
+        IO.puts("found a bitcoin")
+        Node.stop()
         {:reply,val}
       end
       if String.at("#{val}",test)=="0" do

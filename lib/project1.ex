@@ -16,9 +16,8 @@ defmodule Project1 do
     if length(list) > val do
       
       pid=Node.spawn(List.last(Node.list),Project1.Supervisor,:start_child,["81160185"<>RandomBytes.base16,List.first(args)])
-      val=val+1;
-      wait(val,args,map)
+      wait(length(list),args,map)
     end
-    wait(val,args)
+    wait(length(list),args)
   end
 end
