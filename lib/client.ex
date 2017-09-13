@@ -8,15 +8,13 @@ defmodule Project1.Client do
       Node.alive?
       Project1.Exdistutils.start_distributed(:project1,:ok)
       val="project1@"<>List.first(args);
-      IO.puts(val);
       ping=Node.ping :"#{val}"
-      IO.puts(ping)
       if ping == :pang do
         IO.puts("Not able to Connect")
-        Process.sleep(1_000_000)
+        Process.exit(self(),2);
       end
       IO.puts("connecting to node successful")
-      Process.sleep(10000)
+      Process.sleep(1000)
       connect(args)
     end
     
@@ -71,8 +69,8 @@ defmodule Project1.Client do
     defp check_string(val,name,key,test) do
       if String.to_integer(key)==test do
         IO.puts(name<>" "<>val);
-        IO.puts("found a bitcoin")
         Node.stop()
+        Process.exit(self(),1);
         {:reply,val}
       end
       if String.at("#{val}",test)=="0" do
@@ -84,7 +82,6 @@ defmodule Project1.Client do
     defp find_hash(key,name,times) do
       key=:crypto.hash(:sha256,key)|>Base.encode16|>String.downcase;
       if(check_string(key,name,times,0)) do
-        #IO.puts(name<>" "<>key)
         {:reply,key}
       end
       find_hash(key,name,times)

@@ -7,17 +7,17 @@ defmodule Project1 do
     else
       #we need to start connecting here
       Project1.Client.connect(args);
-      
-      #IO.inspect Project1.Client.find_item(pid,"karangoel81160185",List.first(args))
     end
   end
   def wait(val,args,map\\%{}) do
     list=Node.list
     if length(list) > val do
-      
-      pid=Node.spawn(List.last(Node.list),Project1.Supervisor,:start_child,["81160185"<>RandomBytes.base16,List.first(args)])
-      wait(length(list),args,map)
+      var="81160185"<>RandomBytes.base16
+      if Map.get(map,String.to_atom(var))==nil do
+        Node.spawn(List.last(Node.list),Project1.Supervisor,:start_child,[var,List.first(args)])
+        wait(length(list),args,Map.put(map,String.to_atom(var),1))
+      end
     end
-    wait(length(list),args)
+    wait(length(list),args,map)
   end
 end
