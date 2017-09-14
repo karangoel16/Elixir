@@ -6,12 +6,13 @@ defmodule Project1.Supervisor do
     end
   
     def init(:ok) do
-        children = [Project1.Client]
-        Supervisor.init(children, strategy: :simple_one_for_one,type: :worker)
+        children = [worker(Project1.Client,[])]
+        supervise(children, strategy: :simple_one_for_one,type: :worker)
     end
     
     def start_child(args1,args2) do
-        {:ok,pid}=Project1.Client.start_link();
-        Project1.Client.find_item(pid,args1,args2)
+        {:ok,pid}=start_link()
+        {:ok,child}=Supervisor.start_child(pid,[])
+        Project1.Client.find_item(child,args1,args2)
     end
 end
