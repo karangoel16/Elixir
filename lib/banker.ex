@@ -1,8 +1,14 @@
 defmodule Project1.Banker do
-    use GenServer
+    use Agent
     def start_link() do
-        GenServer.start_link(__MODULE__,:ok)
+        Agent.start_link(fn -> %{} end)
     end
+    def get(bucket, key) do
+        Agent.get(bucket, &Map.get(&1, key))
+    end
+    def put(bucket, key, value) do
+        Agent.update(bucket, &Map.put(&1, key, value))
+      end
     def log(data) do
         IO.puts(data)
     end

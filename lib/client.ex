@@ -5,13 +5,14 @@ defmodule Project1.Client do
   
     #client
     def connect(args) do
-      Node.alive?
-      Project1.Exdistutils.start_distributed(:project1,:ok)
-      val="project1@"<>List.first(args);
-      ping=Node.ping :"#{val}"
-      if ping == :pang do
-        IO.puts("Not able to Connect")
-        Process.exit(self(),2);
+      unless Node.alive?() do
+        Project1.Exdistutils.start_distributed(:project1,:ok)
+        val="project1@"<>List.first(args);
+        ping=Node.ping :"#{val}"
+        if ping == :pang do
+         IO.puts("Not able to Connect")
+          Process.exit(self(),2);
+        end
       end
       IO.puts("connecting to node successful")
       Process.sleep(1000)
