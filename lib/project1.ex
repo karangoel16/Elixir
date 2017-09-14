@@ -3,6 +3,8 @@ defmodule Project1 do
     {check_add,_}=:inet_parse.strict_address('#{args}');
     if check_add == :error do
       Project1.Exdistutils.start_distributed(:project1,check_add)
+      var="81160185"<>RandomBytes.base16
+      spawn(Project1.Supervisor,:start_child,[var,List.first(args)])
       wait(0,args)#in this we will see if any new Node is Connected
     else
       #we need to start connecting here
