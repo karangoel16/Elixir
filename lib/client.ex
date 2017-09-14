@@ -5,7 +5,7 @@ defmodule Project1.Client do
   
     #client
     def connect(args) do
-      unless Node.alive?() do
+      #unless Node.alive?() do
         Project1.Exdistutils.start_distributed(:project1,:ok)
         val="project1@"<>List.first(args);
         ping=Node.ping :"#{val}"
@@ -13,7 +13,7 @@ defmodule Project1.Client do
          IO.puts("Not able to Connect")
           Process.exit(self(),2);
         end
-      end
+      #end
       IO.puts("connecting to node successful")
       Process.sleep(1000)
       connect(args)
@@ -21,14 +21,6 @@ defmodule Project1.Client do
     
     def start_link() do
       GenServer.start_link(__MODULE__,:ok)
-    end
-
-    def lookup(server, name) do
-      GenServer.call(server, {:lookup, name})
-    end
-
-    def create(server, name) do
-      GenServer.cast(server, {:create, name})
     end
 
     def stop(server) do
@@ -39,32 +31,14 @@ defmodule Project1.Client do
       GenServer.call(server,{:initialize,input,times},:infinity)
     end
   
-    def final_call(server,output) do
-      GenServer.call(server,{:final,output})
-    end
-    
     #Server callbacks
 
     def init(:ok) do
       {:ok,%{}}
     end
 
-    def handle_call({choice, name,times}, _from, names) do
-      case choice do
-        :lookup -> {:reply, Map.fetch(names, name), names}  
-        :initialize ->find_hash(name,name,times)
-        {:reply,"test"}
-      end
-      
-    end
-
-    def handle_cast({:create, name}, names) do
-      if Map.has_key?(names, name) do
-        {:noreply, names}
-      else
-        {:ok, bucket} = Project1.Agent.start_link([])
-        {:noreply, Map.put(names, name, bucket)}
-      end
+    def handle_call({:initialize, name,times}, _from, _) do
+        find_hash(name,name,times)
     end
 
     defp check_string(val,name,key,test) do
