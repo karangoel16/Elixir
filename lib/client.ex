@@ -19,6 +19,13 @@ defmodule Project1.Client do
       connect(args)
     end
     
+    def check_core(pid) do
+      GenServer.call(pid,{:check,"",""})
+    end
+
+    def start_link(args) do
+      GenServer.start_link(__MODULE__,:ok,name: String.to_atom(args))
+    end
     def start_link() do
       GenServer.start_link(__MODULE__,:ok)
     end
@@ -37,8 +44,13 @@ defmodule Project1.Client do
       {:ok,%{}}
     end
 
-    def handle_call({:initialize, name,times}, _from, _) do
-        find_hash(name,name,times)
+    def handle_call({check, name,times}, _from, state) do
+      case check do
+        :check->
+              var=:erlang.system_info(:logical_processors_available)
+              {:reply,var,state}
+        :initialize->find_hash(name,name,times)
+      end  
     end
 
     defp check_string(val,name,key,test) do
