@@ -59,9 +59,8 @@ defmodule Project1 do
   def spawner(core,times,node,args,pid_banker) do
     case core>times do
       true->
-            {:ok,var}=get_seed(pid_banker)
             server=Node.self()
-            Node.spawn(node,Project1.Supervisor,:start_child,[var,List.first(args),server])
+            Node.spawn(node,Project1.Supervisor,:start_child,[List.first(args),server])
             times=times+1
             spawner(core,times,node,args,pid_banker)
             {:ok,%{}}

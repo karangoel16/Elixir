@@ -34,8 +34,9 @@ defmodule Project1.Client do
       GenServer.stop(server)
     end
     
-    def find_item(server,input,times,node) do
-      GenServer.call(server,{:initialize,input,times,node},:infinity)
+    def find_item(server,times,node) do
+      var=GenServer.call({Server, node},{:get_seed},:infinity)
+      GenServer.call(server,{:initialize,var,times,node},:infinity)
     end
   
     #Server callbacks
