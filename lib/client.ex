@@ -34,8 +34,8 @@ defmodule Project1.Client do
       GenServer.stop(server)
     end
     
-    def find_item(server,input,times) do
-      GenServer.call(server,{:initialize,input,times},:infinity)
+    def find_item(server,input,times,node) do
+      GenServer.call(server,{:initialize,input,times,node},:infinity)
     end
   
     #Server callbacks
@@ -45,33 +45,32 @@ defmodule Project1.Client do
       {:ok,%{}}
     end
 
-    def handle_call({check, name,times}, _from, state) do
+    def handle_call({check, name,times,node}, _from, state) do
       case check do
         :check->
               var=:erlang.system_info(:logical_processors_available)
               {:reply,var,state}
-        :initialize->find_hash(name,name,times)
+        :initialize->find_hash(name,name,times,node)
       end  
     end
 
-    defp check_string(val,name,key,test) do
+    defp check_string(val,name,key,test,node) do
       if String.to_integer(key)==test do
         IO.puts(name<>" "<>val);
-        server=Project1.Exdistutils.generate_name(:project1,:error)
-        var=GenServer.call({Server, server},{:get_seed},:infinity)
-        find_hash(var,var,key)
+        var=GenServer.call({Server, node},{:get_seed},:infinity)
+        find_hash(var,var,key,node)
         {:reply,val,%{}}
       end
       if String.at("#{val}",test)=="0" do
         test=test+1
-        check_string(val,name,key,test)
+        check_string(val,name,key,test,node)
       end
       {:noreply,%{}}
     end 
-    defp find_hash(key,name,times) do
+    defp find_hash(key,name,times,node) do
       key=:crypto.hash(:sha256,key)|>Base.encode16|>String.downcase;
-      check_string(key,name,times,0)
-      find_hash(key,name,times)
+      check_string(key,name,times,0,node)
+      find_hash(key,name,times,node)
       {:noreply,%{}} 
     end
 

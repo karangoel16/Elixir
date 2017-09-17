@@ -6,7 +6,7 @@ defmodule Project1 do
     {:ok,pid_banker}=Project1.Banker.start_link
     {:ok,var}=get_seed(pid_banker)
     GenServer.start_link(__MODULE__,{:ok,pid_banker},name: Server)
-    spawn(Project1.Supervisor,:start_child,[var,List.first(args)])
+    spawn(Project1.Supervisor,:start_child,[var,List.first(args),Node.self()])
     spawn(fn->wait(0,args,pid_banker)end)#in this we will see if any new Node is Connected
     loop()
   end
@@ -38,7 +38,7 @@ defmodule Project1 do
     if length(list) > val do
         #this will tell us how many cores does the machine have  
         Node.spawn(List.last(Node.list),Project1.Client,:start_link,["test"])
-        core=GenServer.call({String.to_atom("test"), List.last(Node.list)}, {:check,"",""})
+        core=GenServer.call({String.to_atom("test"), List.last(Node.list)}, {:check,"","",""})
         spawner(core,0,List.last(Node.list),args,pid_banker)
         wait(length(list),args,pid_banker)
     end
@@ -59,7 +59,7 @@ defmodule Project1 do
     case core>times do
       true->
             {:ok,var}=get_seed(pid_banker)
-            Node.spawn(List.last(Node.list),Project1.Supervisor,:start_child,[var,List.first(args)])
+            Node.spawn(node,Project1.Supervisor,:start_child,[var,List.first(args),node])
             times=times+1
             spawner(core,times,node,args,pid_banker)
             {:ok,%{}}
