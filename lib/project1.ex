@@ -5,8 +5,9 @@ defmodule Project1 do
     Project1.Exdistutils.start_distributed(:project1,:error)
     {:ok,pid_banker}=Project1.Banker.start_link
     {:ok,var}=get_seed(pid_banker)
+    var=:erlang.system_info(:logical_processors_available)
     GenServer.start_link(__MODULE__,{:ok,pid_banker},name: Server)
-    spawn(Project1.Supervisor,:start_child,[var,List.first(args),Node.self()])
+    spawn(fn->spawner(var-1,0,Node.self(),args,pid_banker)end)
     spawn(fn->wait(0,args,pid_banker)end)#in this we will see if any new Node is Connected
     loop()
   end
