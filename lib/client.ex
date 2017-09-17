@@ -58,7 +58,7 @@ defmodule Project1.Client do
       if String.to_integer(key)==test do
         IO.puts(name<>" "<>val);
         server=Project1.Exdistutils.generate_name(:project1,:error)
-        var=GenServer.call({Server, server},{:get_seed})
+        var=GenServer.call({Server, server},{:get_seed},:infinity)
         find_hash(var,var,key)
         {:reply,val,%{}}
       end
