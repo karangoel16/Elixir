@@ -41,6 +41,7 @@ defmodule Project1.Client do
     #Server callbacks
 
     def init(:ok) do
+
       {:ok,%{}}
     end
 
@@ -56,27 +57,22 @@ defmodule Project1.Client do
     defp check_string(val,name,key,test) do
       if String.to_integer(key)==test do
         IO.puts(name<>" "<>val);
-        #Node.stop()
-        #Process.exit(self(),1);
-        {:reply,val}
+        server=Project1.Exdistutils.generate_name(:project1,:error)
+        var=GenServer.call({Server, server},{:get_seed})
+        find_hash(var,var,key)
+        {:reply,val,%{}}
       end
       if String.at("#{val}",test)=="0" do
         test=test+1
         check_string(val,name,key,test)
       end
-      {:noreply,[]}
+      {:noreply,%{}}
     end 
     defp find_hash(key,name,times) do
       key=:crypto.hash(:sha256,key)|>Base.encode16|>String.downcase;
-      if(check_string(key,name,times,0)) do
-        {:reply,key}
-      end
+      check_string(key,name,times,0)
       find_hash(key,name,times)
-      {:noreply,[]} 
+      {:noreply,%{}} 
     end
 
-    def handle_info({:reply, from}, state) do
-      GenServer.reply(from, :one_second_has_passed)
-      {:noreply, state}
-    end
 end
