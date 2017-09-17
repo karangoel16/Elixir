@@ -8,8 +8,12 @@ defmodule Project1 do
     GenServer.start_link(__MODULE__,{:ok,pid_banker},name: Server)
     spawn(Project1.Supervisor,:start_child,[var,List.first(args)])
     spawn(fn->wait(0,args,pid_banker)end)#in this we will see if any new Node is Connected
+    loop()
   end
-
+  def loop() do
+    Process.sleep(100000000)
+    loop()
+  end
   def init(:ok,pid_banker) do
     {:ok,Map.put(%{},"BANKER",pid_banker)}
   end
