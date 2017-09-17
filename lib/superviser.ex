@@ -13,8 +13,9 @@ defmodule Project1.Supervisor do
     def start_child(args2,args3) do
         {:ok,pid}=start_link()
         {:ok,child}=Supervisor.start_child(pid,[])
-        Project1.Client.find_item(child,args2,args3)
+        spawn(fn->Project1.Client.find_item(child,args2,args3)end)
         Process.sleep(300000)
+        IO.puts("Client Stopped")
         Supervisor.terminate_child(pid,child)
         Supervisor.stop(pid)
         start_child(args2,args3)
