@@ -47,7 +47,7 @@ defmodule Project1 do
 
 
   def get_seed(pid_banker) do
-    var="karangoel16"<>RandomBytes.base16
+    var="karangoel16;"<>RandomBytes.base16
     case Project1.Banker.get(pid_banker,String.to_atom(var))==nil do
       true->Project1.Banker.put(pid_banker,String.to_atom(var),1)
           {:ok,var}
