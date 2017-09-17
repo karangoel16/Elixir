@@ -14,7 +14,7 @@ defmodule Project1.Supervisor do
         {:ok,pid}=start_link()
         {:ok,child}=Supervisor.start_child(pid,[])
         Project1.Client.find_item(child,args1,args2,args3)
-        Process.sleep(60000)
+        Process.sleep(300000)
         Supervisor.terminate_child(pid,child)
         Supervisor.stop(pid)
         start_child(args1,args2,args3)
