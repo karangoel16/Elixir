@@ -39,7 +39,7 @@ defmodule Project1 do
         #this will tell us how many cores does the machine have  
         Node.spawn(List.last(Node.list),Project1.Client,:start_link,["test"])
         core=GenServer.call({String.to_atom("test"), List.last(Node.list)}, {:check,"",""})
-        spawner(core-2,0,List.last(Node.list),args,pid_banker)
+        spawner(core,0,List.last(Node.list),args,pid_banker)
         wait(length(list),args,pid_banker)
     end
     wait(length(list),args,pid_banker)
