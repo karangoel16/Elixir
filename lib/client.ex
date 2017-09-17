@@ -20,7 +20,7 @@ defmodule Project1.Client do
     end
     
     def check_core(pid) do
-      GenServer.call(pid,{:check,"",""})
+      GenServer.call(pid,{:check,"","",""})
     end
 
     def start_link(args) do
