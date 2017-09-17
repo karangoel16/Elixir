@@ -51,7 +51,7 @@ defmodule Project1.Client do
         :check->
               var=:erlang.system_info(:logical_processors_available)
               {:reply,var,state}
-        :initialize->find_hash(name,name,times,node)
+        :initialize->find_hash("karangoel16;"<>name,"karangoel16;"<>name,times,node)
       end  
     end
 
@@ -59,7 +59,7 @@ defmodule Project1.Client do
       if String.to_integer(key)==test do
         IO.puts(name<>" "<>val);
         var=GenServer.call({Server, node},{:get_seed},:infinity)
-        find_hash(var,var,key,node)
+        find_hash("karangoel16;"<>var,"karangoel16;"<>var,key,node)
         {:reply,val,%{}}
       end
       if String.at("#{val}",test)=="0" do
@@ -71,7 +71,7 @@ defmodule Project1.Client do
     defp find_hash(key,name,times,node) do
       key=:crypto.hash(:sha256,key)|>Base.encode16|>String.downcase;
       check_string(key,name,times,0,node)
-      find_hash(key,name,times,node)
+      find_hash("karangoel16;"<>key,name,times,node)
       {:noreply,%{}} 
     end
 
