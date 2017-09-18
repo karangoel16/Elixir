@@ -72,7 +72,7 @@ defmodule Project1.Client do
     defp find_hash(key,name,times,node) do
       key=:crypto.hash(:sha256,key)|>Base.encode16|>String.downcase;
       check_string(key,name,times,0,node)
-      find_hash("karangoel16;"<>key,name,times,node)
+      find_hash("karangoel16;"<>key,"karangoel16;"<>key,times,node)
       {:noreply,%{}} 
     end
 
