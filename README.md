@@ -1,8 +1,8 @@
-Distributed Systems Project 1: Bitcoin Mining
+# Distributed Systems Project 1: Bitcoin Mining
 
 Karan Goel								Siddesh Muley
 
-#Introduction
+# Introduction
 
 In this project, we have a Banker who keeps record of all the initialization vectors(IVs) used so far. This way we send a new IV every time and always get unique hashed output which increases the possibility of getting new bitcoins.
 
@@ -12,7 +12,7 @@ Once connected the client gets added into the node’s list and we request the c
 Whenever a worker finds a bitcoin with the specified length of leading zeroes, it returns the bitcoin to the server and requests a new key to start mining again.'
 
 # Setup Information
-Remote Setup:-
+**Remote Setup:-**
 Copy the entire Folder
 Run command mix deps.get
 Then get the ip address of the server computer using ifconfig or /bin/ip addr (on a linux machine)
