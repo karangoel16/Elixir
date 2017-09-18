@@ -14,14 +14,14 @@ Whenever a worker finds a bitcoin with the specified length of leading zeroes, i
 # Setup Information
 **Remote Setup:-**
 ```
--Copy the entire Folder
--Run command mix deps.get
--Then get the ip address of the server computer using ifconfig or /bin/ip addr (on a linux machine)
--Run `mix escript.build`
--For local setup run the code on server `./project1 <leading_zeroes_in_bitcoin>`
--For remote setup start the same code on client following steps 1-3 and then running `./project1 <server_IP_address>`
+1. Copy the entire Folder
+2. Run command mix deps.get
+3. Then get the ip address of the server computer using ifconfig or /bin/ip addr (on a linux machine)
+4. Run `mix escript.build`
+5. For local setup run the code on server `./project1 <leading_zeroes_in_bitcoin>`
+6. For remote setup start the same code on client following steps 1-3 and then running `./project1 <server_IP_address>`
 
-At times system doesn’t start node in that case epmd daemon and refuses the connection in that case we need to run the following command iex --sname <Garbage name> and close the terminal and try to run the process again.
+At times system doesn’t start node in that case epmd daemon and refuses the connection in that case we need to run the following command **iex --sname <Garbage name>** and close the terminal and try to run the process again.
 ```
 
 # More Information
