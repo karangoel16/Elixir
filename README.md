@@ -71,14 +71,15 @@ L2 cache:              256K
 L3 cache:              8192K
 NUMA node0 CPU(s):     0-7
 
-We used command time ./project1 4
+We used command 
+`time ./project1 4`
 >real    0m15.906s
 >user    1m52.804s
 >sys     0m5.584s
 ```
-CPU TIME/REAL TIME = 7.044
+**CPU TIME/REAL TIME = 7.044**
 
-The largest key bitcoin we were able to generate using machines we had is 8
+The largest key bitcoin we were able to generate using machines we had is **8**
 
 karangoel16;d5dfcc9fa8a3791aeceb4125f4b1e5137caa614a6171d68326722313d320e88a 00000000bae601c3417f5b7dcb4272a5a80cf3a95f757a66299f1f4001748301
 
