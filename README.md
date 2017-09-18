@@ -3,7 +3,8 @@ Distributed Systems Project 1: Bitcoin Mining
 Karan Goel								Siddesh Muley
 
 #Introduction
-'In this project, we have a Banker who keeps record of all the initialization vectors(IVs) used so far. This way we send a new IV every time and always get unique hashed output which increases the possibility of getting new bitcoins.
+
+In this project, we have a Banker who keeps record of all the initialization vectors(IVs) used so far. This way we send a new IV every time and always get unique hashed output which increases the possibility of getting new bitcoins.
 
 We have a Server which does the following once started:
 It waits for clients to connect and while it is waiting for a connection request, it spawns its own worker which acts exactly like any other client.
@@ -22,7 +23,7 @@ For remote setup start the same code on client following steps 1-3 and then runn
 At times system doesn’t start node in that case epmd daemon and refuses the connection in that case we need to run the following command iex --sname <Garbage name> and close the terminal and try to run the process again.
 
 
-More Information
+#More Information
 Work Unit: The random string generator creates 32 bit character string with the (36)^(32) possible combination. In our project each worker gets initialization vectors(IV) from the server and then works till it gets a bitcoin. So every spawned worker gets one IV(Work unit), works on it and then asks for more IVs from the server. Reason for this architecture:-
 
 All the workers work on the parallel system and the problem given is mutually exclusive, i.e. no two workers will have same initialisation vector.Also we are hashing again on the hash after appending “karangoel16;” and clashing of hash has very low probability, this architecture will produce unique string and therefore unique bitcoins. 
