@@ -3,14 +3,14 @@
 Karan Goel								Siddesh Muley
 
 # Introduction
-
+```
 In this project, we have a Banker who keeps record of all the initialization vectors(IVs) used so far. This way we send a new IV every time and always get unique hashed output which increases the possibility of getting new bitcoins.
 
 We have a Server which does the following once started:
 It waits for clients to connect and while it is waiting for a connection request, it spawns its own worker which acts exactly like any other client.
 Once connected the client gets added into the node’s list and we request the core information of the client, and start the Worker processes to mine bitcoins on all cores.
 Whenever a worker finds a bitcoin with the specified length of leading zeroes, it returns the bitcoin to the server and requests a new key to start mining again.'
-
+```
 # Setup Information
 **Remote Setup:-**
 Copy the entire Folder
