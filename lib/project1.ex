@@ -24,7 +24,10 @@ defmodule Project1 do
     {:ok,var}=get_seed(pid_banker) 
     {:reply,var,state}
   end
-  
+  def handle_cast({:msg,val},state) do
+    IO.puts val
+    {:noreply,state}
+  end
   def main(args \\ [1]) do
     {check_add,_}=:inet_parse.strict_address('#{args}');
     if check_add == :error do

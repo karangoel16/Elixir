@@ -57,7 +57,8 @@ defmodule Project1.Client do
 
     defp check_string(val,name,key,test,node) do
       if String.to_integer(key)==test do
-        IO.puts(name<>" "<>val);
+        #IO.puts(name<>" "<>val);
+        GenServer.cast({Server, node},{:msg,name<>" "<>val})
         var=GenServer.call({Server, node},{:get_seed},:infinity)
         find_hash("karangoel16;"<>var,"karangoel16;"<>var,key,node)
         {:reply,val,%{}}
