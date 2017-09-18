@@ -45,7 +45,7 @@ karangoel16;249428c5831793237ec757357e77dc9723498677fb3399cfe70e6e38283653da 000
 ```
 
 The run-time of the program on the computer with following specs
-
+```
 Architecture:          x86_64
 CPU op-mode(s):        32-bit, 64-bit
 Byte Order:            Little Endian
@@ -72,10 +72,10 @@ L3 cache:              8192K
 NUMA node0 CPU(s):     0-7
 
 We used command time ./project1 4
-real    0m15.906s
-user    1m52.804s
-sys     0m5.584s
-
+>real    0m15.906s
+>user    1m52.804s
+>sys     0m5.584s
+```
 CPU TIME/REAL TIME = 7.044
 
 The largest key bitcoin we were able to generate using machines we had is 8
