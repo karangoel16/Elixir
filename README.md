@@ -1,6 +1,7 @@
 # Distributed Systems Project 1: Bitcoin Mining
 
-Karan Goel								Siddesh Muley
+Karan Goel @karangoel16								
+Siddesh Muley @siddheshmuley
 
 # Introduction
 ```
