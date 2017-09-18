@@ -13,17 +13,19 @@ Whenever a worker finds a bitcoin with the specified length of leading zeroes, i
 ```
 # Setup Information
 **Remote Setup:-**
-Copy the entire Folder
-Run command mix deps.get
-Then get the ip address of the server computer using ifconfig or /bin/ip addr (on a linux machine)
-Run `mix escript.build`
-For local setup run the code on server `./project1 <leading_zeroes_in_bitcoin>`
-For remote setup start the same code on client following steps 1-3 and then running `./project1 <server_IP_address>`
+```
+-Copy the entire Folder
+-Run command mix deps.get
+-Then get the ip address of the server computer using ifconfig or /bin/ip addr (on a linux machine)
+-Run `mix escript.build`
+-For local setup run the code on server `./project1 <leading_zeroes_in_bitcoin>`
+-For remote setup start the same code on client following steps 1-3 and then running `./project1 <server_IP_address>`
 
 At times system doesn’t start node in that case epmd daemon and refuses the connection in that case we need to run the following command iex --sname <Garbage name> and close the terminal and try to run the process again.
-
+```
 
 # More Information
+```
 Work Unit: The random string generator creates 32 bit character string with the (36)^(32) possible combination. In our project each worker gets initialization vectors(IV) from the server and then works till it gets a bitcoin. So every spawned worker gets one IV(Work unit), works on it and then asks for more IVs from the server. Reason for this architecture:-
 
 All the workers work on the parallel system and the problem given is mutually exclusive, i.e. no two workers will have same initialisation vector.Also we are hashing again on the hash after appending “karangoel16;” and clashing of hash has very low probability, this architecture will produce unique string and therefore unique bitcoins. 
@@ -40,7 +42,7 @@ karangoel16;a16bf8b2e16ae2b55167f41812faeb48cb47034657b17953c050c38e6c034b6b 000
 karangoel16;c1ad213f506b3b0c1ec255dc4cf2537fa8a862ff595887a025b210491c2dc6b6 000094f2ada083c0378a5a839c4eca73dd78ab1c8ff41eecc4e74af04fca0ded
 karangoel16;249428c5831793237ec757357e77dc9723498677fb3399cfe70e6e38283653da 0000950660fed85b33e904a8d32554ec23904010593672beb9c930f181685283
 
-
+```
 
 The run-time of the program on the computer with following specs
 
